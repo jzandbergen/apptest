@@ -1,0 +1,9 @@
+apiVersion: v2
+name: whoami-appset-3
+version: 0.0.0
+dependencies:
+  - name: whoami
+    repository: '@topicus'
+    version: 0.1.0
+
+

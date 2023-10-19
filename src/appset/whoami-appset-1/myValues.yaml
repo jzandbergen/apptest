@@ -1,0 +1,18 @@
+# NOTE: because "whoami" is a dependency on parent helm-chart "whoami-appset-1",
+# we need to place it's configuration under the key "whoami".
+whoami:
+  ingress:
+    enabled: true
+    classname: traefik
+    annotations:
+      cert-manager.io/cluster-issuer: ca-issuer
+    hosts:
+      - host: whoami-appset-1.localhost
+        paths:
+          - path: /
+            pathType: ImplementationSpecific
+    tls:
+      - secretName: whoami-appset-1-tls
+        hosts:
+          - whoami-appset-1.localhost
+
