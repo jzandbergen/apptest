@@ -1,0 +1,35 @@
+resources:
+  - https://raw.githubusercontent.com/jzandbergen/apptest/main/src/plain/whoami.yaml
+
+nameSuffix: -kustomize
+replicas:
+  - name: whoami
+    count: 4
+      
+patchesJson6902:
+  - target:
+      version: v1
+      kind: Ingress
+      name: whoami
+    patch: |-
+      - op: replace
+        path: "/spec/rules/0/host"
+        value: whoami-kustomize.localhost
+
+  - target:
+      version: v1
+      kind: Ingress
+      name: whoami
+    patch: |-
+      - op: replace
+        path: "/spec/tls/0/hosts/0"
+        value: whoami-kustomize.localhost
+
+  - target:
+      version: v1
+      kind: Ingress
+      name: whoami
+    patch: |-
+      - op: replace
+        path: "/spec/tls/0/secretName"
+        value: whoami-kustomize-tls
