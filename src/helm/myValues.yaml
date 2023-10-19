@@ -1,1 +1,18 @@
 # Values for the helm chart.
+whoami-helm-dep:
+  whoami:
+    ingress:
+      enabled: true
+      classname: traefik
+      annotations:
+        cert-manager.io/cluster-issuer: ca-issuer
+      hosts:
+        - host: whoami-helm-dep.localhost
+          paths:
+            - path: /
+              pathType: ImplementationSpecific
+      tls:
+        - secretName: whoami-helm-dep-tls
+          hosts:
+            - whoami-helm-dep.localhost
+
